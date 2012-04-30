@@ -109,11 +109,11 @@
               $("#dialogHeader").children().each(function(){
                  $(this).detach();
               });
-              $("#dialogHeader").append( $('<div>'+records[index].companyName+'</div>') );
+              $("#dialogHeader").append( '<div>'+records[index].companyName+'</div>' );
 
               var companyDataView = $("#companyDataView");
               fillCompanyDataView( index );
-             
+              ("#companyDataContent").append( $('<a href="#listPage" data-role="button" data-theme="b" data-transition="slide">Return to VC Round Listing</a>') );
             }
          });
          $("#companyListView").listview("refresh");
@@ -128,7 +128,7 @@
   });
 </script>
 </head><body> 
-<div data-role="page" data-theme="b">
+<div data-role="page" id="listPage" data-theme="b">
  <div data-role="header">
    <h1>Recent VC Rounds</h1>
  </div>
@@ -143,8 +143,9 @@
   <div data-role="header">
     <h1 id="dialogHeader"></h1>
   </div>
-  <div data-role="content">
-     <ul id="companyDataView" data-role="listview" data-inset="true"><ul>
+  <div data-role="content" id="companyDataContent">
+     <ul id="companyDataView" data-role="listview" data-inset="true"></ul>
+     <a href="#listPage" data-role="button" data-theme="b" data-transition="slide">Return to VC Round Listing</a>
   </div>
   <div data-role="footer">
     <h2>&copy; 2012 MktNeutral.com</h2>
