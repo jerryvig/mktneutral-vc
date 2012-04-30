@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
 public class GetSecondMarketIconUrls {
    private static HtmlUnitDriver driver;
@@ -62,12 +63,14 @@ public class GetSecondMarketIconUrls {
 
    public static void scrapeUrl( String _url ) {
        driver.get( _url );
-       WebElement iconDiv = driver.findElementByXPath("//div[@class='sm-icon-border']");
-       WebElement iconImg = iconDiv.findElement( By.tagName("img") );
-       
+
        try {
-           System.out.println( _url + ", " + iconImg.getAttribute("src") ); 
-	   writer.write( "\"" + _url + "\",\"" + iconImg.getAttribute("src") + "\"\n" );
+         WebElement iconDiv = driver.findElementByXPath("//div[@class='sm-icon-border']");
+         WebElement iconImg = iconDiv.findElement( By.tagName("img") );
+      
+         System.out.println( _url + ", " + iconImg.getAttribute("src") ); 
+	 writer.write( "\"" + _url + "\",\"" + iconImg.getAttribute("src") + "\"\n" );
        } catch ( IOException ioe ) { ioe.printStackTrace(); }
+       catch ( NoSuchElementException nsee ) { nsee.printStackTrace(); }
    }
 }
