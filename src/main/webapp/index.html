@@ -59,7 +59,7 @@
               $("#companyListView").append( $('<li data-role="list-divider">'+(monthDate.getMonth())+'/'+monthDate.getFullYear()+'</li>') );
            }
 
-           $("#companyListView").append( $('<li id="li'+i+'"><a href="#dialog" data-transition="slide"><h3>'+records[i].companyName+'</h3><p style="font-weight:bold;">Raised: '+records[i].lastFundingAmount+'<br>Location: '+records[i].city+', '+records[i].state+'</p></a></li>') );                      
+           $("#companyListView").append( $('<li id="li'+i+'"><a href="#dialog" data-transition="slide"><img src="'+records[i].secondMarketIconUrl+'" alt=""><h3>'+records[i].companyName+'</h3><p style="font-weight:bold;">Raised: '+records[i].lastFundingAmount+'<br>Location: '+records[i].city+', '+records[i].state+'</p></a></li>') );                      
          }
    }
 

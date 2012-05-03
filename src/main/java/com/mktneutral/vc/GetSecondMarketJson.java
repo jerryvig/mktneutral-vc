@@ -32,7 +32,7 @@ public class GetSecondMarketJson extends ActionSupport implements ServletRequest
 	request = _request;
    }
 
-   public InputStream getIStream() {
+   public InputStream getIStream() throws Exception {
        return IStream;
    }
 
@@ -57,12 +57,12 @@ public class GetSecondMarketJson extends ActionSupport implements ServletRequest
 
    public void doQuery() throws Exception {
        if ( request.getParameter("queryName").equals("startupQuery") ) {
-	   rs = stmt.executeQuery("SELECT * FROM (SELECT * FROM second_market_fact_table WHERE ( state='CA' ) ORDER BY last_funding_date DESC, last_funding_amount DESC) WHERE rownum<30");
+	   rs = stmt.executeQuery("SELECT * FROM (SELECT t1.*, t2.second_market_icon_url FROM second_market_fact_table t1 LEFT OUTER JOIN second_mkt_icon_urls t2 ON ( t2.second_market_url=t1.second_market_url ) WHERE ( t1.state='CA' ) ORDER BY t1.last_funding_date DESC, t1.last_funding_amount DESC) WHERE rownum<30");
        }
        else if ( request.getParameter("queryName").equals("scrollQuery") ) {
 	   String startRow = request.getParameter("startRow");
 	   String endRow = request.getParameter("endRow");
-	   rs = stmt.executeQuery("SELECT * FROM (SELECT a.*, ROWNUM r FROM (SELECT * FROM second_market_fact_table WHERE ( state='CA' ) ORDER BY last_funding_date DESC, last_funding_amount DESC) a WHERE rownum<="+endRow+") WHERE r>="+startRow);
+	   rs = stmt.executeQuery("SELECT * FROM (SELECT a.*, ROWNUM r FROM (SELECT t1.*, t2.second_market_icon_url FROM second_market_fact_table t1 LEFT OUTER JOIN second_mkt_icon_urls t2 ON ( t2.second_market_url=t1.second_market_url ) WHERE ( t1.state='CA' ) ORDER BY t1.last_funding_date DESC, t1.last_funding_amount DESC) a WHERE rownum<="+endRow+") WHERE r>="+startRow);
        }
    }
 
@@ -82,7 +82,7 @@ public class GetSecondMarketJson extends ActionSupport implements ServletRequest
 	  if ( rs.getDate(9) != null ) jsonRecord.put("minMonth",rs.getDate(9).toString());
 	  jsonRecord.put("uniqueVisitors",visitorFormat.format(rs.getInt(10)));
 	  jsonRecord.put("visitorGrowth",pctFormatter.format(rs.getDouble(11)));
-          jsonRecord.put("secondMarketIconUrl","https://dbr2dggbe4ycd.cloudfront.net/company/yelp_150.png");
+          jsonRecord.put("secondMarketIconUrl",rs.getString(14));
 	  jsonArray.put( jsonRecord );
       }
       rs.close();
