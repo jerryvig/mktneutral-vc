@@ -82,11 +82,11 @@ public class GetSecondMarketJson extends ActionSupport implements ServletRequest
 	  if ( rs.getDate(9) != null ) jsonRecord.put("minMonth",rs.getDate(9).toString());
 	  jsonRecord.put("uniqueVisitors",visitorFormat.format(rs.getInt(10)));
 	  jsonRecord.put("visitorGrowth",pctFormatter.format(rs.getDouble(11)));
+          jsonRecord.put("secondMarketIconUrl","https://dbr2dggbe4ycd.cloudfront.net/company/yelp_150.png");
 	  jsonArray.put( jsonRecord );
       }
       rs.close();
 
       outputJson.put("records",jsonArray);
    }
-
 }

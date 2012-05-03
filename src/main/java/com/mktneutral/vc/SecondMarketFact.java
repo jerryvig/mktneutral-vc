@@ -15,6 +15,7 @@ public class SecondMarketFact {
     private double visitorGrowth;
     private String secondMarketUrl;
     private int version;
+    private String secondMarketIconUrl;
 
     public SecondMarketFact() {
 	uniqueVisitors = 0;
@@ -57,4 +58,7 @@ public class SecondMarketFact {
 
     public void setVersion( int _version ) { version = _version; }
     public int getVersion() { return version; }
+  
+    public void setSecondMarketIconUrl( String _url ) { secondMarketIconUrl = _url; }
+    public String getSecondMarketIconUrl() { return secondMarketIconUrl; }
 }
