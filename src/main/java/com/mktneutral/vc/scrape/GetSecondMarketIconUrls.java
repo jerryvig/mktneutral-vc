@@ -36,7 +36,7 @@ public class GetSecondMarketIconUrls {
      ArrayList<String> urlList = new ArrayList<String>();
     
      try {
-       ResultSet rs = stmt.executeQuery("SELECT DISTINCT second_market_url FROM second_market_fact_table WHERE second_market_url IS NOT NULL ORDER BY second_market_url ASC");
+       ResultSet rs = stmt.executeQuery("SELECT DISTINCT second_market_url FROM second_market_fact_table WHERE second_market_url>'https://www.secondmarket.com/company/triad-semiconductor' ORDER BY second_market_url ASC");
        while ( rs.next() ) {
 	  urlList.add( rs.getString(1).trim() );
        }
