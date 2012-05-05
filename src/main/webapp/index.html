@@ -109,7 +109,7 @@
               $("#dialogHeader").children().each(function(){
                  $(this).detach();
               });
-              $("#dialogHeader").append( '<div>'+records[index].companyName+'</div>' );
+              $("#dialogHeader").append( '<div>'+records[index].companyName+'</div><img src="'+records[index].secondMarketIconUrl+'" alt="">' );
 
               var companyDataView = $("#companyDataView");
               fillCompanyDataView( index );
